@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "sarmedrizvi.github.io/FaceDetectionWeb/static/css/main.86e548a5.chunk.css",
+    "main.js": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/main.6e1132c8.chunk.js",
+    "main.js.map": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/main.6e1132c8.chunk.js.map",
+    "runtime-main.js": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/runtime-main.576e71dd.js",
+    "runtime-main.js.map": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/runtime-main.576e71dd.js.map",
+    "static/css/2.eb45ad44.chunk.css": "sarmedrizvi.github.io/FaceDetectionWeb/static/css/2.eb45ad44.chunk.css",
+    "static/js/2.f9066644.chunk.js": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/2.f9066644.chunk.js",
+    "static/js/2.f9066644.chunk.js.map": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/2.f9066644.chunk.js.map",
+    "index.html": "sarmedrizvi.github.io/FaceDetectionWeb/index.html",
+    "precache-manifest.f3362068e09efa31ee9cdd08473972dc.js": "sarmedrizvi.github.io/FaceDetectionWeb/precache-manifest.f3362068e09efa31ee9cdd08473972dc.js",
+    "service-worker.js": "sarmedrizvi.github.io/FaceDetectionWeb/service-worker.js",
+    "static/css/2.eb45ad44.chunk.css.map": "sarmedrizvi.github.io/FaceDetectionWeb/static/css/2.eb45ad44.chunk.css.map",
+    "static/css/main.86e548a5.chunk.css.map": "sarmedrizvi.github.io/FaceDetectionWeb/static/css/main.86e548a5.chunk.css.map",
+    "static/js/2.f9066644.chunk.js.LICENSE": "sarmedrizvi.github.io/FaceDetectionWeb/static/js/2.f9066644.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.576e71dd.js",
+    "static/css/2.eb45ad44.chunk.css",
+    "static/js/2.f9066644.chunk.js",
+    "static/css/main.86e548a5.chunk.css",
+    "static/js/main.6e1132c8.chunk.js"
+  ]
+}
