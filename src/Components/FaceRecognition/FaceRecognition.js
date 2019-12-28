@@ -1,11 +1,19 @@
 import React from 'react'
-
-const FaceRecognition = ({ imageUrl }) => (
+import { connect } from 'react-redux'
+import './FaceRecognition.css';
+const FaceRecognition = ({ URL, size }) => (
     <div className='center'>
         <div className='absolute mt2'>
-            <img src={imageUrl} alt='' width='500px' height='auto'></img>
+            <img id='faceImage' src={URL} alt='' width='500px' height='auto'></img>
+            <div className='bounding-box' style= {{ top:size.topRow, right:size.rightCol,bottom:size.bottomRow,left:size.leftCol}}></div>
         </div>
+        {console.log(size)}
     </div>
 )
-
-export default FaceRecognition;
+const mapStateToProps = (state) => ({
+    
+    URL: state.InputBox.URL,
+    size: state.size.size
+   
+})
+export default connect(mapStateToProps)(FaceRecognition);
