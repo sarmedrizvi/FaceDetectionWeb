@@ -1,7 +1,7 @@
 import SquareBoxTypes from "./SquareBox.Types"
 
 const INITIAL_STATE = {
-    size: {}
+    size: [{}]
 }
 
 const SquareBoxReducer = (state = INITIAL_STATE, action) => {

@@ -5,7 +5,7 @@ const FaceRecognition = ({ URL, size }) => (
     <div className='center'>
         <div className='absolute mt2'>
             <img id='faceImage' src={URL} alt='' width='500px' height='auto'></img>
-            <div className='bounding-box' style= {{ top:size.topRow, right:size.rightCol,bottom:size.bottomRow,left:size.leftCol}}></div>
+          {size.map(box=> <div className='bounding-box' style= {{ top:box.topRow, right:box.rightCol,bottom:box.bottomRow,left:box.leftCol}}></div> )}  
         </div>
         {console.log(size)}
     </div>

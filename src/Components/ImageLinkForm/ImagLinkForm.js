@@ -10,28 +10,35 @@ const app = new Clarifai.App({
     apiKey: '0c91da893dce4c12be0e9461cc7b4567'
 });
 const calculateBox = (response) => {
-    const clarifai = response.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('faceImage')
-    const width = Number(image.width);
-    const height = Number(image.height);
-    return {
-        leftCol: clarifai.left_col * width,
-        topRow: clarifai.top_row * height,
-        rightCol: width - (clarifai.right_col * width),
-        bottomRow: height - (clarifai.bottom_row * height)
+    const box = []
+    for (let i = 0; i < response.outputs[0].data.regions.length; i++) {
+
+        const clarifai = response.outputs[0].data.regions[i].region_info.bounding_box;
+        const image = document.getElementById('faceImage')
+        const width = Number(image.width);
+        const height = Number(image.height);
+        box.push({
+            leftCol: clarifai.left_col * width,
+            topRow: clarifai.top_row * height,
+            rightCol: width - (clarifai.right_col * width),
+            bottomRow: height - (clarifai.bottom_row * height)
+        })
+
     }
+
+    return box;
+
 }
 
 
-const ImageLinkForm = ({ InputText, URL, Text,ButtonClicked }) => {
+const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked }) => {
 
 
-    
+
     const onButtonSubmit = () => {
         URL(Text);
         app.models.predict(Clarifai.FACE_DETECT_MODEL, Text).then(
             function (response) {
-               
                 const size = calculateBox(response);
                 ButtonClicked(size)
             }
@@ -66,9 +73,9 @@ const mapDispatchToProp = (dispatch) => ({
 
     InputText: InputBox => dispatch(InputText(InputBox)),
     URL: URL => dispatch(InputUrl(URL)),
-    ButtonClicked: size=>dispatch(ButtonClicked(size)),
-  
-   
+    ButtonClicked: size => dispatch(ButtonClicked(size)),
+
+
 })
 
 
