@@ -10,21 +10,20 @@ const app = new Clarifai.App({
     apiKey: '0c91da893dce4c12be0e9461cc7b4567'
 });
 const calculateBox = (response) => {
-    const box = []
-    for (let i = 0; i < response.outputs[0].data.regions.length; i++) {
 
-        const clarifai = response.outputs[0].data.regions[i].region_info.bounding_box;
-        const image = document.getElementById('faceImage')
+    const arr = response.outputs[0].data.regions;
+    const image = document.getElementById('faceImage')
+    const box = arr.map(item => {
+        const clarifai = item.region_info.bounding_box;
         const width = Number(image.width);
         const height = Number(image.height);
-        box.push({
+        return {
             leftCol: clarifai.left_col * width,
             topRow: clarifai.top_row * height,
             rightCol: width - (clarifai.right_col * width),
             bottomRow: height - (clarifai.bottom_row * height)
-        })
-
-    }
+        }
+    })
 
     return box;
 
@@ -33,11 +32,9 @@ const calculateBox = (response) => {
 
 const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked }) => {
 
-
-
-    const onButtonSubmit = () => {
+    async function onButtonSubmit() {
         URL(Text);
-        app.models.predict(Clarifai.FACE_DETECT_MODEL, Text).then(
+        await app.models.predict(Clarifai.FACE_DETECT_MODEL, Text).then(
             function (response) {
                 const size = calculateBox(response);
                 ButtonClicked(size)
