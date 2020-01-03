@@ -2,7 +2,7 @@ import RouteActionTypes from "./Route-Types";
 
 
 const INITIAL_STATE = {
-    Route:'home'
+    Route:'signin'
 }
 
 const RouteReducer = (state = INITIAL_STATE, action) => {

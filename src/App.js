@@ -16,7 +16,7 @@ import Register from './Components/Forms/Register';
 const params = {
   particles: {
     number: {
-      value: 60,
+      value: 100,
       density: {
         enable: true,
         value_area: 800
@@ -27,8 +27,12 @@ const params = {
 }
 
 
+
 const App = ({ route }) => {
 
+// fetch('http://localhost:3000/')
+// .then(response=> response.json())
+// .then(console.log)
 
 
   return (

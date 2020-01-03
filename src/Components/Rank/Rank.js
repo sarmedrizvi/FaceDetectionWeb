@@ -1,17 +1,22 @@
 import React from 'react'
 
 import './Rank.css'
-
-const Rank = () => (
+import { connect } from 'react-redux'
+const Rank = ({user}) => (
     <div>
         <div className='white f3'>
-            {'Sarmed, your current rank is ...'}
+            {`${user.name}, your current rank is ...`}
         </div>
         <div className='white f1'>
-            {'#5'}
+            {user.entries}
         </div>
     </div>
 
 )
+const mapStateToProps = state => ({
 
-export default Rank;
+    user: state.user.user
+})
+
+
+export default connect(mapStateToProps)(Rank);

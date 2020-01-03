@@ -4,6 +4,7 @@ import './ImageLinkForm.css'
 import { InputText, InputUrl } from '../../Redux/Input-Redux/Input.Action'
 import { ButtonClicked } from '../../Redux/SqaureBox-Redux/SquareBox.Action';
 import Clarifai from 'clarifai';
+import { UserChange } from '../../Redux/Route/User/User-Action';
 // a403429f2ddf4b49b307e318f00e528b
 
 const app = new Clarifai.App({
@@ -30,14 +31,28 @@ const calculateBox = (response) => {
 }
 
 
-const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked }) => {
+const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked, user, userChanging }) => {
 
-    async function onButtonSubmit() {
+    function onPictureSubmit() {
         URL(Text);
-        await app.models.predict(Clarifai.FACE_DETECT_MODEL, Text).then(
+        app.models.predict(Clarifai.FACE_DETECT_MODEL, Text).then(
             function (response) {
                 const size = calculateBox(response);
                 ButtonClicked(size)
+                if (response) {
+                    fetch('http://localhost:3000/image', {
+                        method: 'put',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            id: user.id
+                        })
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            userChanging({ ...user, entries: data })
+                        })
+                }
+
             }
         );
     }
@@ -48,7 +63,7 @@ const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked }) => {
             <div className='center'>
                 <div className=' center form pa4 br3 shadow-5'>
                     <input type='text' className='f4 pa2 w-70 center' onChange={InputText} />
-                    <button className='w-30 grow f4 link ph3 pv2 dib white bg-light-purple' onClick={onButtonSubmit}
+                    <button className='w-30 grow f4 link ph3 pv2 dib white bg-light-purple' onClick={onPictureSubmit}
                     >Detect</button>
                 </div>
             </div>
@@ -62,7 +77,8 @@ const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked }) => {
 
 
 const mapStateToProps = state => ({
-    Text: state.InputBox.Input
+    Text: state.InputBox.Input,
+    user: state.user.user
 })
 
 
@@ -71,6 +87,7 @@ const mapDispatchToProp = (dispatch) => ({
     InputText: InputBox => dispatch(InputText(InputBox)),
     URL: URL => dispatch(InputUrl(URL)),
     ButtonClicked: size => dispatch(ButtonClicked(size)),
+    userChanging: userChange => dispatch(UserChange(userChange)),
 
 
 })
