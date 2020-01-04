@@ -5,7 +5,7 @@ import { InputText, InputUrl } from '../../Redux/Input-Redux/Input.Action'
 import { ButtonClicked } from '../../Redux/SqaureBox-Redux/SquareBox.Action';
 import Clarifai from 'clarifai';
 import { UserChange } from '../../Redux/Route/User/User-Action';
-// a403429f2ddf4b49b307e318f00e528b
+
 
 const app = new Clarifai.App({
     apiKey: '0c91da893dce4c12be0e9461cc7b4567'
@@ -31,7 +31,7 @@ const calculateBox = (response) => {
 }
 
 
-const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked, user, userChanging }) => {
+const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked, user, userChanging,box }) => {
 
     function onPictureSubmit() {
         URL(Text);
@@ -63,7 +63,7 @@ const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked, user, userChanging
             <div className='center'>
                 <div className=' center form pa4 br3 shadow-5'>
                     <input type='text' className='f4 pa2 w-70 center' onChange={InputText} />
-                    <button className='w-30 grow f4 link ph3 pv2 dib white bg-light-purple' onClick={onPictureSubmit}
+                    <button className='w-30 grow f4 link ph3 pv2 dib white bg-light-purple' onClick={()=>{onPictureSubmit();box([{}])}}
                     >Detect</button>
                 </div>
             </div>
@@ -88,8 +88,7 @@ const mapDispatchToProp = (dispatch) => ({
     URL: URL => dispatch(InputUrl(URL)),
     ButtonClicked: size => dispatch(ButtonClicked(size)),
     userChanging: userChange => dispatch(UserChange(userChange)),
-
-
+    box: boxes => dispatch(ButtonClicked(boxes)),
 })
 
 
