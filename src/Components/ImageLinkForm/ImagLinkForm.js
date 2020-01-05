@@ -40,7 +40,7 @@ const ImageLinkForm = ({ InputText, URL, Text, ButtonClicked, user, userChanging
                 const size = calculateBox(response);
                 ButtonClicked(size)
                 if (response) {
-                    fetch('http://localhost:3000/image', {
+                    fetch('https://pacific-beyond-35810.herokuapp.com/image', {
                         method: 'put',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
